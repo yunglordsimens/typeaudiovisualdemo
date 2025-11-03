@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>P5.js Audiovisual Typography Research</title>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * { margin:0; padding:0; box-sizing:border-box; image-rendering:pixelated; }
+    html, body {
+      height:100vh; overflow:hidden; background:#000;
+      font-family:'JetBrains Mono', monospace; color:#fff; cursor:default;
+      image-rendering: crisp-edges;
+    }
+    #p5-container {
+      position:fixed; top:0; left:300px; right:300px; bottom:0;
+      pointer-events:auto; image-rendering:pixelated;
+    }
+    #menu, #info {
+      position:fixed; top:0; width:300px; height:100%;
+      background:#000; padding:16px; z-index:10; overflow-y:auto;
+      border:1px solid #fff;
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    #menu::-webkit-scrollbar, #info::-webkit-scrollbar { display: none; /* Chrome, Safari, Opera */ }
+    #menu { left:0; border-right:1px solid #fff; }
+    #info { right:0; border-left:1px solid #fff; }
+    .menu-item {
+      margin:4px 0; padding:6px; border-left:2px solid #fff;
+      padding-left:10px; cursor:pointer; font-size:13px;
+      font-weight:400;
+    }
+    .menu-item:hover { background:#fff; color:#000; }
+    .menu-item.active {
+      border-left:4px solid #fff;
+      padding-left:8px; background:#fff; color:#000;
+      font-weight:700;
+    }
+    h3 {
+      color:#fff; font-size:15px; margin-bottom:8px;
+      border-bottom:1px solid #fff; padding-bottom:4px;
+      font-weight:700;
+    }
+    #intro {
+      position:fixed; top:0; left:0; width:100%; height:100%;
+      background:#000; z-index:100; display:flex;
+      align-items:center; justify-content:center; flex-direction:column;
+      text-align:center; padding:20px;
+    }
+    #intro h1 { font-size:24px; margin-bottom:16px; }
+    #intro p { font-size:14px; margin-bottom:24px; max-width:600px; }
+    #intro button { padding:10px 20px; background:#fff; color:#000; border:none; cursor:pointer; font-family:inherit; font-weight:700; }
+    #intro button:hover { background:#ccc; }
+  </style>
+</head>
+<body>
+<!-- INTRO -->
+<div id="intro">
+  <h1>Audiovisual Typography Research in p5.js</h1>
+  <p>This interactive site collects various p5.js sketches exploring typography, with a focus on kinetic, interactive, generative, and sound-reactive examples. Click on menu items to load and view the sketches in the central area.</p>
+  <button onclick="document.getElementById('intro').style.display='none';">Enter Research</button>
+</div>
+<!-- MENU -->
+<div id="menu">
+  <h3>TYPOGRAPHY EXPERIMENTS</h3>
+  <div class="menu-item" data-id="typo1" data-url="https://b2renger.github.io/p5js_typo/">TYPOGRAPHY EXPERIMENTS</div>
+  <div class="menu-item" data-id="grid" data-url="https://geohndz.github.io/GridForm/">GRID FORM ASCII</div>
+  <div class="menu-item" data-id="letters" data-url="https://editor.p5js.org/p5/embed/Typography:_Letters">TYPOGRAPHY LETTERS</div>
+  <div class="menu-item" data-id="rotation" data-url="https://editor.p5js.org/p5/embed/Typography:_Text_Rotation">TEXT ROTATION</div>
+  <div class="menu-item" data-id="words" data-url="https://editor.p5js.org/p5/embed/Typography:_Words">TYPOGRAPHY WORDS</div>
+  <div class="menu-item" data-id="satneon" data-url="https://editor.p5js.org/cmorgantywls/embed/ryZNVx_ff">SATURDAY IN NEON</div>
+  <div class="menu-item" data-id="tonio" data-url="https://editor.p5js.org/tonio.bevacqui/embed/XXwAd1QnY">TYPOGRAPHY BY TONIO</div>
+  <div class="menu-item" data-id="blackhole" data-url="https://editor.p5js.org/jngrzzl/embed/KRbzGjbbz">BLACK HOLE TYPOGRAPHY</div>
+  <div class="menu-item" data-id="tutorial" data-url="https://editor.p5js.org/Belphe13/embed/25m8OAZeh">TYPOGRAPHY TUTORIAL</div>
+
+  <h3>GENERATIVE TYPOGRAPHY</h3>
+  <div class="menu-item" data-id="gentext" data-url="https://editor.p5js.org/byronohalloran/embed/McJw-y-lO">GENERATIVE WITH TEXTTOPOINTS</div>
+  <div class="menu-item" data-id="genex" data-url="https://editor.p5js.org/turtlefingers00%40gmail.com/embed/_ENHnWvxo">GENERATIVE TYPOGRAPHY EXERCISE</div>
+  <div class="menu-item" data-id="gentemp" data-url="https://editor.p5js.org/ali.torbati/embed/lUbDeauJ-">GENERATIVE TYPOGRAPHY TEMPLATE</div>
+  <div class="menu-item" data-id="vicgen" data-url="https://editor.p5js.org/vic.ramzon/embed/uy-q7mjuZ">GENERATIVE BY VIC</div>
+  <div class="menu-item" data-id="rhythmic" data-url="https://tll-creativecoding.com/rhythmic-glyphs.html">RHYTHMIC GLYPHS</div>
+
+  <h3>KINETIC TYPOGRAPHY</h3>
+  <div class="menu-item" data-id="wavy" data-url="https://editor.p5js.org/pattvira/embed/38PqFVEXz">WAVY LETTER T</div>
+  <div class="menu-item" data-id="kinetic" data-url="https://editor.p5js.org/DAI2020/embed/uvJX1SM_J">KINETIC TYPE</div>
+  <div class="menu-item" data-id="touchwaves" data-url="https://editor.p5js.org/tick-nopp/embed/Avz60geNi">TOUCHWAVES KINETIC</div>
+  <div class="menu-item" data-id="oscillating" data-url="https://editor.p5js.org/pattvira/embed/4BroUvdr8">OSCILLATING KINETIC</div>
+  <div class="menu-item" data-id="kinetic03" data-url="https://editor.p5js.org/GGERKK/embed/HtQWYLc1C">KINETIC TYPOGRAPHY 03</div>
+  <div class="menu-item" data-id="texttopoints" data-url="https://editor.p5js.org/pattvira/embed/JDwgmoZEr">INTRO TO TEXTTOPOINTS</div>
+  <div class="menu-item" data-id="rotating" data-url="https://editor.p5js.org/pattvira/embed/GkwmD5D2q">ROTATING KINETIC</div>
+  <div class="menu-item" data-id="3dkinetic" data-url="https://editor.p5js.org/pattvira/embed/r8ykXZaHd">3D KINETIC TYPOGRAPHY</div>
+  <div class="menu-item" data-id="work2024" data-url="https://editor.p5js.org/Valcoholics/embed/8XKf9ohSx">WORKING 2024 KINETIC</div>
+  <div class="menu-item" data-id="kineticline" data-url="https://editor.p5js.org/sojamo/embed/wASzgBTpW">KINETIC TYPE LINE</div>
+
+  <h3>INTERACTIVE TYPOGRAPHY</h3>
+  <div class="menu-item" data-id="textrain" data-url="https://editor.p5js.org/pattvira/embed/b_iu4DTYf">TEXT RAIN WITH WEBCAM</div>
+  <div class="menu-item" data-id="rotblocks" data-url="https://editor.p5js.org/pattvira/embed/zF8f04Nep">ROTATING BLOCKS DISPLAY</div>
+  <div class="menu-item" data-id="secret" data-url="https://editor.p5js.org/pattvira/embed/ms6ws-r5e">SECRET MESSAGE</div>
+  <div class="menu-item" data-id="intertype" data-url="https://editor.p5js.org/j123richardson/embed/Fth0Nj3vT">INTERACTIVE TYPOGRAPHY</div>
+  <div class="menu-item" data-id="interfinal" data-url="https://editor.p5js.org/j123richardson/embed/xWR6Vx8qT">INTERACTIVE TYPE FINAL</div>
+  <div class="menu-item" data-id="interv01" data-url="https://editor.p5js.org/yichenkuooo/embed/xJzf-NQBj">INTERACTIVE TYPOGRAPHY V01</div>
+
+  <h3>TEXT EFFECTS</h3>
+  <div class="menu-item" data-id="distort" data-url="https://editor.p5js.org/pattvira/embed/ocxO9KkU6">TEXT DISTORTION</div>
+  <div class="menu-item" data-id="textanim" data-url="https://editor.p5js.org/radium.scientist/embed/H6FNGhtU5">TEXT ANIMATION</div>
+  <div class="menu-item" data-id="particles" data-url="https://editor.p5js.org/MatthewBoden/embed/xhITIw1mE">TEXT ANIMATION WITH PARTICLES</div>
+  <div class="menu-item" data-id="cecil3" data-url="https://editor.p5js.org/CecilBOEY123/embed/JD4ACRbz">3 TYPOGRAPHY</div>
+  <div class="menu-item" data-id="amuki" data-url="https://www.behance.net/gallery/189942767/Amuki-Tools-No-173-Particles">AMUKI TOOLS PARTICLES</div>
+
+  <h3>SOUND REACTIVE TYPOGRAPHY</h3>
+  <div class="menu-item" data-id="audioreact" data-url="https://editor.p5js.org/kiko_QICHEN/embed/pV81YOofkl">AUDIO REACTIVE TEXT</div>
+  <div class="menu-item" data-id="soundreact" data-url="https://editor.p5js.org/taraannosaur/embed/TDMSMju12">SOUND REACTIVE TEXT</div>
+  <div class="menu-item" data-id="whitetext" data-url="https://editor.p5js.org/dmn328/embed/bvtzFCvcI">WHITE TEXT AUDIO REACTIVE</div>
+  <div class="menu-item" data-id="audiotest" data-url="https://editor.p5js.org/sharonhello/embed/YVmO50Ted">AUDIO RESPONSIVE TEXT TEST</div>
+  <div class="menu-item" data-id="cidgen" data-url="https://editor.p5js.org/rinayerin/embed/K3fXboLyv">CID-GEN-TYPE SOUND-REACTIVE</div>
+  <div class="menu-item" data-id="bouncing" data-url="https://editor.p5js.org/mingeom/embed/niviY1pga">BOUNCING WAVE TYPOGRAPHY</div>
+  <div class="menu-item" data-id="psound3" data-url="https://editor.p5js.org/lakeishaa/embed/g8wdCAe_U">P5 SOUND 3</div>
+
+  <h3>AUDIOVISUAL TYPOGRAPHY</h3>
+  <div class="menu-item" data-id="audiotypo" data-url="https://editor.p5js.org/ab42/embed/tURQnBhEs">TYPO WITH AUDIO</div>
+  <div class="menu-item" data-id="loadplaysound" data-url="https://editor.p5js.org/p5/embed/Sound:_Load_and_Play_Sound">LOAD AND PLAY SOUND</div>
+  <div class="menu-item" data-id="material" data-url="https://seonghyunleem.com/material-weathering-to-sound-oscilator">MATERIAL WEATHERING TO SOUND OSCILLATOR</div>
+
+  <h3>DESIGN TOOLS</h3>
+  <div class="menu-item" data-id="timtools" data-url="https://timrodenbroeker.de/p5js-design-tools/">P5.JS DESIGN TOOLS DIRECTORY</div>
+  <div class="menu-item" data-id="p5studio" data-url="https://timrodenbroeker.de/p5studio/">P5STUDIO</div>
+  <div class="menu-item" data-id="greeting" data-url="https://greetizify.studiodev.xyz/">GREETING CARD GENERATOR</div>
+</div>
+<!-- INFO -->
+<div id="info">
+  <h3>CLICK TO ACTIVATE</h3>
+  <p>Audiovisual research on typography in p5.js</p>
+</div>
+<!-- CONTAINER -->
+<div id="p5-container"></div>
+<script>
+let active = new Set();
+
+function toggle(id) {
+  const menu = document.querySelector(`.menu-item[data-id="${id}"]`);
+  if (active.has(id)) {
+    active.delete(id);
+    menu.classList.remove('active');
+  } else {
+    active.clear();
+    active.add(id);
+    document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+    menu.classList.add('active');
+  }
+  const container = document.getElementById('p5-container');
+  container.innerHTML = '';
+  if (active.size > 0) {
+    const url = menu.dataset.url;
+    const iframe = document.createElement('iframe');
+    iframe.src = url;
+    iframe.style.width = '100%';
+    iframe.style.height = '100%';
+    iframe.style.border = 'none';
+    container.appendChild(iframe);
+  }
+  updateInfo();
+}
+
+function updateInfo() {
+  const info = document.getElementById('info');
+  if (active.size === 0) {
+    info.innerHTML = `<h3>CLICK TO ACTIVATE</h3><p>Audiovisual research on typography in p5.js</p>`;
+    return;
+  }
+  let html = `<h3>ACTIVE: ${active.size}</h3>`;
+  active.forEach(id => {
+    const menu = document.querySelector(`.menu-item[data-id="${id}"]`);
+    html += `<p><strong>${menu.textContent}</strong></p>`;
+  });
+  info.innerHTML = html;
+}
+
+document.querySelectorAll('.menu-item').forEach(item => {
+  item.addEventListener('click', () => toggle(item.dataset.id));
+});
+</script>
+</body>
+</html>
